@@ -4,14 +4,87 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duck Hunt</title>
-  <style>
-    html, body { margin: 0; height: 100%; background: #111; overflow: hidden; }
-    body { display: flex; align-items: center; justify-content: center; }
-    canvas { display: block; cursor: none; image-rendering: pixelated; touch-action: none; }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <canvas id="game" width="800" height="600"></canvas>
+  <div id="stage">
+    <canvas id="game" width="800" height="600"></canvas>
+
+    <section id="home" class="screen">
+      <h1>DUCK HUNT</h1>
+      <div class="menu">
+        <button data-action="play1">NEW GAME · 1 DUCK</button>
+        <button data-action="play2">NEW GAME · 2 DUCKS</button>
+        <button data-action="history">SCORE HISTORY</button>
+        <button data-action="settings">SETTINGS</button>
+      </div>
+      <p class="top" id="home-top"></p>
+      <p class="hint">Aim with the mouse · click to shoot · 3 shots per wave<br>P / Esc pause · M mute</p>
+    </section>
+
+    <section id="settings" class="screen hidden">
+      <div class="panel">
+        <h2>SETTINGS</h2>
+        <div class="row"><span>SOUND</span>
+          <div class="seg" data-key="sound">
+            <button data-action="set" data-value="true">ON</button>
+            <button data-action="set" data-value="false">OFF</button>
+          </div>
+        </div>
+        <div class="row"><span>VOLUME</span><input id="volume" type="range" min="0" max="1" step="0.05"></div>
+        <div class="row"><span>ART STYLE</span>
+          <div class="seg" data-key="art">
+            <button data-action="set" data-value="classic">CLASSIC</button>
+            <button data-action="set" data-value="pixel">PIXEL</button>
+          </div>
+        </div>
+        <div class="row"><span>DIFFICULTY</span>
+          <div class="seg" data-key="difficulty">
+            <button data-action="set" data-value="easy">EASY</button>
+            <button data-action="set" data-value="normal">NORMAL</button>
+            <button data-action="set" data-value="hard">HARD</button>
+          </div>
+        </div>
+        <div class="row"><span>CROSSHAIR</span><div class="seg" data-key="crosshair" id="swatches"></div></div>
+        <div class="row"><span>DISPLAY</span><button data-action="fullscreen" class="small">FULLSCREEN</button></div>
+        <button data-action="back" class="wide">BACK</button>
+      </div>
+    </section>
+
+    <section id="history" class="screen hidden">
+      <div class="panel">
+        <h2>SCORE HISTORY</h2>
+        <p class="stats" id="history-stats"></p>
+        <div class="scroll"><table id="history-table"></table></div>
+        <div class="buttons">
+          <button data-action="clear-history" class="small">CLEAR</button>
+          <button data-action="home" class="small">BACK</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="pause" class="screen hidden">
+      <h2>PAUSED</h2>
+      <div class="menu">
+        <button data-action="resume">RESUME</button>
+        <button data-action="settings">SETTINGS</button>
+        <button data-action="quit">QUIT TO HOME</button>
+      </div>
+    </section>
+
+    <section id="gameover" class="screen hidden">
+      <h1 class="bad">GAME OVER</h1>
+      <p class="newhigh hidden" id="go-newhigh">NEW HIGH SCORE!</p>
+      <div class="panel summary" id="go-summary"></div>
+      <div class="menu">
+        <button data-action="again">PLAY AGAIN</button>
+        <button data-action="home">HOME</button>
+      </div>
+    </section>
+  </div>
   <script src="game.js"></script>
 </body>
 </html>
