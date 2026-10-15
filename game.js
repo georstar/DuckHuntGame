@@ -503,6 +503,7 @@
     ctx.textAlign = align;
     ctx.textBaseline = 'middle';
     ctx.lineWidth = Math.max(3, size / 6);
+    ctx.lineJoin = 'round';
     ctx.strokeStyle = '#000';
     ctx.strokeText(str, x, y);
     ctx.fillStyle = color;
